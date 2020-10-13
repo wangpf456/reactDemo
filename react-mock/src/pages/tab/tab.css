@@ -1,0 +1,36 @@
+.tabchange-box{
+    margin-bottom: 20px;
+}
+.tabchange-box ul{
+    display: flex;
+    justify-content: space-around;
+}
+.tabchange-box ul li{
+    width: 100px;
+    height:30px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+}
+.tabchange-box ul li.active{
+    border-bottom: 1px solid rebeccapurple;
+}
+.tabchange-box .tabContent{
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+}
+.tab0{
+    color: #fff;
+    background: red;
+}
+.tab1{
+    color: #fff;
+    background: rgba(212, 0, 255, 0.815);
+}
+.tab2{
+    color: #fff;
+    background: rgba(236, 12, 98, 0.815);
+}

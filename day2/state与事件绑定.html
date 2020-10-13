@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>设置状态：setState</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            class From extends React.Component {
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        textType: 'text',
+                        pwdType: 'password',
+                        username: '',
+                        password: ""
+                    }
+                }
+                changeUser(e){
+                    this.setState({
+                        username: e.target.value
+                    })
+                }
+                changePassword(e) {
+                    this.setState({
+                        password: e.target.value
+
+                    })
+                }
+                render() {
+                    return (
+                        <div>
+                            <label>
+                                <span>用户名</span>
+                                <input type={this.state.textType} onChange={this.changeUser.bind(this)}
+                                value={this.state.username} placeholder="请输入用户名" />
+                            </label>
+                            <label>
+                                <span>密码</span>
+                                <input type={this.state.pwdType} onChange={this.changePassword.bind(this)}
+                                value={this.state.password} placeholder="请输入密码" />
+                            </label>
+                            <div>用户:{this.state.username}密码:{this.state.password}</div>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <From/>,
+                document.getElementById('root')
+            )
+        </script>
+    </body>
+</html>

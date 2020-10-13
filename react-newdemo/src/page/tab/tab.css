@@ -1,0 +1,8 @@
+.active{
+    background: red;
+    color: #fff;
+}
+.content{
+    background: #ccc;
+    color: #000;
+}

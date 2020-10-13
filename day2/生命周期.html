@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>生命周期</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            class Clock extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {date: 0};
+                }
+                //组件挂载后运行
+                componentDidMount() {
+                    //如果数据不渲染在页面上，你可以直接往类上添加字段，不需要添加到state上
+                    this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+                    );
+                }
+                //组件卸载前运行
+                componentWillUnmount() {
+                    clearInterval(this.timerID);
+                }
+
+                tick() {
+                    let num = this.state.date += 10
+                    this.setState({
+                        date: num
+                    });
+                    if(this.state.date == 100){
+                        clearInterval(this.timerID)
+                    }
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <h1>Hello, world!</h1>
+                            <h2>It is {this.state.date}.</h2>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <Clock />,
+                document.getElementById('root')
+            );
+        </script>
+    </body>
+</html>

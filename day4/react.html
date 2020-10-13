@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>设置状态：setState</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+            var myStyle = {
+                marginLeft: 20
+            }
+            class Counter extends React.Component{
+                constructor(props){
+                    super(props)
+                    this.state = {count:0}
+                    this.handleClick = this.handleClick.bind(this)
+                    this.delteClick = this.delteClick.bind(this)
+                }
+                handleClick(){
+                    this.setState(function(state){
+                        return {count: state.count + 1}
+                    })
+                }
+                delteClick(){
+                    this.setState(prevState=>{
+                        return {
+                            count: (prevState.count == this.props.min) ? this.props.min : prevState.count-1
+                        };
+                    });
+                }
+                render(){
+                    return (
+                        <div>
+                            <button onClick={this.handleClick}>次数加</button>
+                            <button onClick={this.delteClick} style={myStyle}>次数减</button>
+                            <h1>点击的次数是{this.state.count}</h1>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <Counter min='0'/>,
+                document.getElementById('example')
+            )
+        </script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>组件</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <div id="example1"></div>
+        <div id="example2"></div>
+        <script type="text/babel">
+            // 使用函数定义了一个组件
+            function HelloMessage(props) {
+                return <h1>Hello World! {props.name}</h1>;
+            }
+            const element = <HelloMessage name='Runoob'/>;
+            ReactDOM.render(
+                element,
+                document.getElementById('example')
+            );
+            // 使用 ES6 class 来定义一个组件
+            class Welcome extends React.Component {
+                render() {
+                    return <h1>Hello World! {this.props.name}</h1>;
+                }
+            }
+            const element1 = <Welcome name='Runoob'/>;
+            ReactDOM.render(
+                element1,
+                document.getElementById('example1')
+            );
+            // 复合组件
+            function Name(props) {
+                return <h1>网站名称：{props.name}</h1>;
+            }
+            function Url(props) {
+                return <h1>网站地址：{props.url}</h1>;
+            }
+            function Nickname(props) {
+                return <h1>网站小名：{props.nickname}</h1>;
+            }
+            function App() {
+                return (
+                <div>
+                    <Name name="菜鸟教程" />
+                    <Url url="http://www.runoob.com" />
+                    <Nickname nickname="Runoob" />
+                </div>
+                );
+            }
+            
+            ReactDOM.render(
+                <App />,
+                document.getElementById('example2')
+            );
+        </script>
+    </body>
+</html>

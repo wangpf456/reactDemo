@@ -1,0 +1,14 @@
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+.list-group-item:last-of-type{
+    border-bottom: none;
+}
+.deleteContent .centence{
+    margin-left: 20px;
+}

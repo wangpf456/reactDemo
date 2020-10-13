@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>React State(状态)</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <div id="example"></div>
+        <div id="example1"></div>
+        <div id="example2"></div>
+        <div id="example3"></div>
+        <script type="text/babel">
+            // 创建一个名称扩展为 React.Component 的 ES6 类，在 render() 方法中使用 this.state 来修改当前的时间。
+            // 添加一个类构造函数来初始化状态 this.state，类组件应始终使用 props 调用基础构造函数。
+            class Clock extends React.Component {
+                constructor(props){
+                    super(props)
+                    this.state = {date:new Date()}
+                }
+                render(){
+                    return(
+                        <div>
+                            <h1>Hello World!</h1>
+                            <h2>现在是{this.state.date.toLocaleTimeString()}</h2>    
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <Clock/>,
+                document.getElementById('root')
+            )
+            // 将生命周期方法添加到类中
+            class Clock1 extends React.Component {
+                constructor(props){
+                    super(props)
+                    this.state = {date:new Date()}
+                }
+                componentDidMount(){
+                    this.timeID = setInterval(() => {
+                        this.tick()
+                    },1000)
+                }
+                componentWillUnmount() {
+                    clearInterval(this.timerID);
+                }
+                tick(){
+                    this.setState({
+                        date: new Date()
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                            <span>将生命周期方法添加到类中,1秒调用一次</span>
+                            <h1>Hello World!</h1>
+                            <h2>现在是{this.state.date.toLocaleTimeString()}</h2>    
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <Clock1/>,
+                document.getElementById('example1')
+            )
+            // 局部封装,数据自顶向下流动
+            function FreeTime(props){
+                return <h2>现在是{props.date.toLocaleTimeString()}</h2> 
+            }
+            class Clock2 extends React.Component {
+                constructor(props){
+                    super(props)
+                    this.state = {date:new Date()}
+                }
+                componentDidMount(){
+                    this.timeID = setInterval(() => {
+                        this.tick()
+                    },1000)
+                }
+                componentWillUnmount() {
+                    clearInterval(this.timerID);
+                }
+                tick(){
+                    this.setState({
+                        date: new Date()
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                            <span>数据自顶向下流动</span>
+                            <h1>Hello World!</h1> 
+                            <FreeTime date={this.state.date}/>  
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <Clock2/>,
+                document.getElementById('example2')
+            )
+            // 单向数据流
+            function FreeTime(props){
+                return <h2>现在是{props.date.toLocaleTimeString()}</h2> 
+            }
+            class Clock3 extends React.Component {
+                constructor(props){
+                    super(props)
+                    this.state = {date:new Date()}
+                }
+                componentDidMount(){
+                    this.timeID = setInterval(() => {
+                        this.tick()
+                    },1000)
+                }
+                componentWillUnmount() {
+                    clearInterval(this.timerID);
+                }
+                tick(){
+                    this.setState({
+                        date: new Date()
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                            <span>单向数据流</span>
+                            <h1>Hello World!</h1> 
+                            <FreeTime date={this.state.date}/>  
+                        </div>
+                    )
+                }
+            }
+            function App(){
+                return(
+                    <div>
+                        <Clock3/>
+                        <Clock3/>
+                        <Clock3/>
+                    </div>
+                )
+            }
+            ReactDOM.render(
+                <App/>,
+                document.getElementById('example3')
+            )
+        </script>
+    </body>
+</html>

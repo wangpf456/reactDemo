@@ -1,0 +1,14 @@
+.listHeader{
+    display: flex;
+    flex-direction: column;
+}
+.modalInput{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.modalInput div{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,16 @@
+.contain{
+    display: flex;
+    flex-wrap: wrap;
+}
+.contain li{
+    width:100px;
+    height:100px;
+    margin:5px;
+    line-height:100px;
+    text-align:center;
+    font-size:30px;
+    transition:all .5s;
+    -moz-transition:all .5s;
+    -webkit-transition:all .5s; 
+    -o-transition:all .5s; 
+}

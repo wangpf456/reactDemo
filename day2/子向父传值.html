@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>子向父传值</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <!-- 子组件通过this.props.函数名   使用父组件的方法 -->
+        <div id="example"></div>
+
+        <script type="text/babel">
+            class Child extends React.Component {
+
+                handleVal = () => { 
+                    var val = this.refs.emailDom.value;
+                    val = val.replace(/[^0-9|a-z|\@|\.]/ig,"");
+                    this.props.handleEmail(val);//子使用父的函数
+                }
+
+                render() {
+                    return (
+                        <div>
+                            子级
+                            请输入邮箱：<input ref="emailDom" onChange={this.handleVal}/>
+                        </div>
+                    );
+                }
+            }
+
+            // 父类 - Parent
+            class Parent extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        email: 'ddd'
+                    }
+                }
+
+                handleEmail = (value) => {
+                    this.setState({
+                        email: value
+                    });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            父级
+                            <div>用户邮箱：{this.state.email}</div>
+                            <Child name="email" handleEmail={this.handleEmail}/>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <Parent />,
+                document.getElementById('example')
+            );
+
+        </script>
+    </body>
+</html>>

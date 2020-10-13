@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>todolist2</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="box">
+            
+        </div>
+        <script type="text/babel">
+            class Todolist extends React.Component{
+                //初始化状态
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        collection:[],
+                        value: ''
+                    };
+                }
+                handleChange(event){
+                    this.setState({
+                        value: event.target.value
+                    })
+                }
+                handleClick(){
+                    this.state.collection.push(this.refs.yzxText.value);
+                    this.setState({
+                        collection: this.state.collection,
+                        value: ''
+                    })
+                }
+                DelClick(index){
+                    this.state.collection.splice(index,1);
+                    this.setState({
+                        collection: this.state.collection
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                            <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} ref="yzxText" style={{width: 200,height: 50}}/>
+                            <input type="button" value="add" onClick={this.handleClick.bind(this)} style={{width: 70,height: 50}}/>
+                            <List items={this.state.collection} delEvent={this.DelClick.bind(this)}>
+                            </List>
+                        </div>
+    
+                    )
+                }
+            }
+            class List extends React.Component{
+                handleDelclick(index){
+                    this.props.delEvent(index);
+                }
+                render(){
+                    var _this = this;
+                    return(
+                        <ul>
+                            {
+                            this.props.items.map(function(item,index){
+                                return    <li key={index}>{item}
+                                        <input type="button" name="" value="del" onClick={
+                                        _this.handleDelclick.bind(_this,index)}/>
+                                    </li>
+                                })
+                            }
+                        </ul>
+                    ) 
+                }
+            }
+            ReactDOM.render(<Todolist></Todolist>,document.getElementById('box'));
+        </script>
+    </body>
+</html>

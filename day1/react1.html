@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>元素渲染</title>
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <div id="example1"></div>
+        <div id="example2"></div>
+        <div id="example3"></div>
+        <script type="text/babel">
+            // 将元素渲染到 DOM 中
+            const element = <div>
+                <span>将元素渲染到 DOM 中</span>
+                <h1>Hello, world!</h1>
+            </div>;
+            ReactDOM.render(
+                element,
+                document.getElementById('example')
+            );
+            // 更新元素渲染
+            function tick() {
+                const element = (
+                    <div>
+                        <span>更新元素渲染</span>
+                        <h1>Hello, world!</h1>
+                        <h2>现在是 {new Date().toLocaleTimeString()}</h2>
+                    </div>
+                );
+                ReactDOM.render(
+                    element,
+                    document.getElementById('example')
+                );
+            }
+            setInterval(tick, 1000);
+            // 将要展示的部分封装起
+            function Clock(props) {
+                return (
+                    <div>
+                        <span>将要展示的部分封装起</span>
+                        <h1>Hello, world!</h1>
+                        <h2>现在是 {props.date.toLocaleTimeString()}.</h2>
+                    </div>
+                );
+            }
+            function tick1() {
+                ReactDOM.render(
+                    <Clock date={new Date()} />,
+                    document.getElementById('example1')
+                );
+            }  
+            setInterval(tick1, 1000);
+            //创建一个 React.Component 的 ES6 类，该类封装了要展示的元素
+            class Clock_new extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <span>创建一个 React.Component 的 ES6 类</span>
+                            <h1>Hello, world!</h1>
+                            <h2>现在是 {this.props.date.toLocaleTimeString()}.</h2>
+                        </div>
+                    );
+                }
+            }
+            
+            function tick2() {
+                ReactDOM.render(
+                    <Clock_new date={new Date()} />,
+                    document.getElementById('example2')
+                );
+            }
+            
+            setInterval(tick2, 1000);
+            // 多层props传值
+            var myStyle = {color:'red',textAlign:'center'}
+
+            class Name extends React.Component {
+                render() {
+                    return <h1 style={myStyle}>网站名称：{this.props.name}</h1>;
+                }
+            }
+            class Url extends React.Component {
+                render() {
+                    return <h1>网站地址：{this.props.url}</h1>;
+                }
+            }
+            class Nickname extends React.Component {
+                render() {
+                    return <h1>网站地址：{this.props.nickname}</h1>;
+                }
+            }
+
+            function App(props) {
+                return (
+                    <div>
+                        <Name name={props.name}/>
+                        <Url  url={props.url}/>
+                        <Nickname  nickname={props.nickname}/>
+                    </div>
+                );
+            }
+            // 多个属性的传入注意不用逗号或分号隔开而是空格符隔开
+            ReactDOM.render(
+                <App name={"菜鸟教程"} url={"http://www.runoob.com"} nickname={"Runoob"}/>,
+                document.getElementById('example3')
+            );
+        </script>
+    </body>
+</html>

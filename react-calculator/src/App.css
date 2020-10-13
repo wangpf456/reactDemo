@@ -1,0 +1,39 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.App {
+    text-align: center;
+}
+
+.App img {
+    width: 300px;
+}
+
+.tab-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.tab-bar a {
+    flex: 1;
+    padding: 16px;
+    background-color: #F1F1F1;
+    color: #000;
+    text-decoration: none;
+}
+
+.tab-bar__active {
+    background-color: #737171 !important;
+    color: #61DAFB !important;
+}
